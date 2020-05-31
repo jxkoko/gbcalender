@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<title>ゴミ出し</title>
+
+<body>
+    <h1>ゴミ出し</h1>
+    <form action="{% url 'today_datetime' %}">
+        {% csrf_token %}
+        <input id = 'today' type="submit" value="今日"/>
+    </form>
+    <div>
+          今日は{{togb}}
+    </div>
+    <form action="{% url 'tomorrow_datetime' %}">
+        {% csrf_token %}
+        <input id = 'tomorrow' type="submit" value="明日"/>
+    </form>
+    <div>
+          明日は{{twgb}}
+    </div>
+</body>
+
+</html>
