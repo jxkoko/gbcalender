@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime,timedelta,timezone
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.shortcuts import render
@@ -13,16 +13,18 @@ class HomeTemplateView(TemplateView):
 
 def today_datetime(request):
     def get_datetime():
-        dt = datetime.datetime.now()
+        JST = timezone(timedelta(hours=+9), 'JST')
+        dt = datetime.now(JST)
         return dt.day
 
-    context = {"togb":june[get_datetime()]}
+    context = {"togb":june[str(get_datetime())]}
     # 対応するhtmlファイルを指定
     return render(request, 'main/index.html',context)  
 
 def tomorrow_datetime(request):
     def get_datetime(delta):
-        dt = datetime.datetime.now() + datetime.timedelta(days=delta)
+        JST = timezone(timedelta(hours=+9), 'JST')
+        dt = datetime.now(JST) + timedelta(days=delta)
         return dt.day
 
     context = {"twgb":june[str(get_datetime(1))]}
